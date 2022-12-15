@@ -1,0 +1,24 @@
+{
+    "packages": [
+        "nodejs-19_x",
+        "yarn",
+        "redis"
+    ],
+    "shell": {
+        "init_hook": [
+            "export DATABASE_URL=\"127.0.0.1\"",
+            "export DATABASE_PORT=6379"
+        ],
+        "scripts": {
+            "redis": [
+                "finish() {redis-cli shutdown}",
+                "trap finish SIGTERM SIGINT",
+                "redis-server conf/redis/redis.conf",
+                "tail -f conf/redis/data/redis.log"
+            ]
+        }
+    },
+    "nixpkgs": {
+        "commit": "52e3e80afff4b16ccb7c52e9f0f5220552f03d04"
+    }
+}
